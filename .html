@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Cálculo do IMC</title>
+  <script>
+    function calcularIMC() {
+      // Obtendo os valores dos campos de entrada
+      var nome = document.getElementById("nome").value;
+      var alturaCm = parseFloat(document.getElementById("altura").value);
+      var peso = parseFloat(document.getElementById("peso").value);
+
+      // Verificando se os campos não estão vazios
+      if (!nome || !alturaCm || !peso) {
+        document.getElementById("resultado").textContent = "Por favor, preencha todos os campos.";
+        return;
+      }
+
+      // Conversão da altura de centímetros para metros
+      var alturaM = alturaCm / 100;
+
+      // Cálculo do IMC
+      var imc = peso / (alturaM * alturaM);
+
+      // Classificação do IMC
+      var classificacao = "";
+
+      if (imc < 16) {
+        classificacao = "Baixo peso muito grave";
+      } else if (imc >= 16 && imc < 17) {
+        classificacao = "Baixo peso grave";
+      } else if (imc >= 17 && imc < 18.5) {
+        classificacao = "Baixo peso";
+      } else if (imc >= 18.5 && imc < 25) {
+        classificacao = "Peso normal";
+      } else if (imc >= 25 && imc < 30) {
+        classificacao = "Sobrepeso";
+      } else if (imc >= 30 && imc < 35) {
+        classificacao = "Obesidade grau I";
+      } else if (imc >= 35 && imc < 40) {
+        classificacao = "Obesidade grau II";
+      } else {
+        classificacao = "Obesidade grau III";
+      }
+
+      // Exibindo o resultado na página
+      document.getElementById("resultado").textContent = 
+        nome + " possui índice de massa corporal igual a " + imc.toFixed(2) + ", sendo classificado como: " + classificacao + ".";
+    }
+  </script>
+</head>
+<body>
+  <h1>Cálculo do Índice de Massa Corporal (IMC)</h1>
+  
+  <!-- Formulário para inserção de dados -->
+  <label for="nome">Nome:</label>
+  <input type="text" id="nome" placeholder="Digite seu nome"><br><br>
+  
+  <label for="altura">Altura (em cm):</label>
+  <input type="number" id="altura" placeholder="Digite sua altura em cm"><br><br>
+  
+  <label for="peso">Peso (em kg):</label>
+  <input type="number" id="peso" placeholder="Digite seu peso em kg"><br><br>
+  
+  <!-- Botão para calcular -->
+  <button onclick="calcularIMC()">Calcular IMC</button><br><br>
+  
+  <!-- Exibindo o resultado -->
+  <div id="resultado"></div>
+</body>
+</html>
